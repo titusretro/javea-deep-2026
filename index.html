@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jávea diep · 20-27 augustus 2026 · Holiday Scout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #09090B;
+      --ink-2: #18181B;
+      --ink-3: #3F3F46;
+      --ink-4: #71717A;
+      --paper: #FAFAFA;
+      --paper-2: #F4F4F5;
+      --line: #E4E4E7;
+      --accent: #EC4899;
+      --accent-ink: #9D174D;
+      --focus: #A855F7;
+      --ok: #15803D;
+      --ok-bg: #DCFCE7;
+      --warn: #A16207;
+      --warn-bg: #FEF3C7;
+      --info: #1D4ED8;
+      --info-bg: #DBEAFE;
+      --bad: #B91C1C;
+      --bad-bg: #FEE2E2;
+      --aurora-1: #FDE68A;
+      --aurora-2: #FBCFE8;
+      --aurora-3: #A5F3FC;
+      --aurora-4: #DDD6FE;
+      --radius: 20px;
+      --radius-sm: 10px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+
+    body.dark {
+      --ink: #FAFAFA;
+      --ink-2: #F4F4F5;
+      --ink-3: #D4D4D8;
+      --ink-4: #A1A1AA;
+      --paper: #09090B;
+      --paper-2: #18181B;
+      --line: #27272A;
+      --aurora-1: #7C2D12;
+      --aurora-2: #831843;
+      --aurora-3: #164E63;
+      --aurora-4: #4C1D95;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      transition: background 400ms var(--ease), color 400ms var(--ease);
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    /* ==== Topbar ==== */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(18px);
+      -webkit-backdrop-filter: saturate(180%) blur(18px);
+      background: color-mix(in srgb, var(--paper) 80%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .wordmark {
+      font-family: 'Playfair Display', serif; font-weight: 600;
+      font-size: 22px; letter-spacing: -.01em;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .wordmark-mark {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav a {
+      padding: 8px 14px; font-size: 14px; font-weight: 500;
+      color: var(--ink-3); text-decoration: none; border-radius: 999px;
+      transition: color 200ms var(--ease), background 200ms var(--ease); cursor: pointer;
+    }
+    .nav a:hover { color: var(--ink); background: var(--paper-2); }
+    .nav a[aria-current="page"] { color: var(--ink); background: var(--paper-2); }
+    .mode-btn {
+      background: transparent; border: 1px solid var(--line); color: var(--ink-3);
+      width: 38px; height: 38px; border-radius: 999px;
+      display: grid; place-items: center; cursor: pointer;
+      transition: color 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .mode-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+    .mode-btn svg { width: 18px; height: 18px; stroke-width: 2; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+    body.dark .mode-btn .sun { display: block; } body.dark .mode-btn .moon { display: none; }
+    body:not(.dark) .mode-btn .sun { display: none; } body:not(.dark) .mode-btn .moon { display: block; }
+
+    /* ==== Hero ==== */
+    .hero {
+      position: relative; overflow: hidden; padding: 100px 24px 96px; isolation: isolate;
+    }
+    .aurora {
+      position: absolute; inset: -20%; z-index: -1;
+      filter: blur(80px) saturate(140%); opacity: .75;
+      background:
+        radial-gradient(45% 40% at 15% 30%, var(--aurora-1) 0%, transparent 60%),
+        radial-gradient(40% 40% at 85% 20%, var(--aurora-2) 0%, transparent 55%),
+        radial-gradient(50% 45% at 70% 80%, var(--aurora-3) 0%, transparent 60%),
+        radial-gradient(35% 40% at 25% 75%, var(--aurora-4) 0%, transparent 55%);
+      animation: drift 28s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(-4%, 3%, 0) scale(1.05); }
+      100% { transform: translate3d(3%, -2%, 0) scale(1.02); }
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--ink-3);
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 70%, transparent);
+      backdrop-filter: blur(8px);
+    }
+    .eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .55; transform: scale(.85); }
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(44px, 7vw, 96px); line-height: 1.02;
+      letter-spacing: -.025em; margin-top: 28px;
+      color: var(--ink); max-width: 14ch;
+    }
+    .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent-ink); }
+    body.dark .hero h1 em { color: #FBCFE8; }
+
+    .hero-meta {
+      margin-top: 36px;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 820px;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .hero-meta > div { padding: 6px 18px; border-right: 1px solid var(--line); }
+    .hero-meta > div:first-child { padding-left: 0; }
+    .hero-meta > div:last-child { border-right: 0; }
+    .hero-meta dt {
+      font-size: 11px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink-4); margin-bottom: 4px;
+    }
+    .hero-meta dd { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: var(--ink); }
+
+    @media (max-width: 720px) {
+      .hero { padding: 72px 20px 72px; }
+      .hero-meta { grid-template-columns: repeat(2, 1fr); }
+      .hero-meta > div { border-right: 0; padding: 10px 0; border-bottom: 1px solid var(--line); }
+      .hero-meta > div:nth-last-child(-n+2) { border-bottom: 0; }
+      .hero-meta > div:first-child, .hero-meta > div:nth-child(3) { padding-right: 18px; }
+    }
+
+    /* ==== Legend ==== */
+    .legend {
+      max-width: 1200px; margin: 0 auto; padding: 24px 24px 0;
+      display: flex; flex-wrap: wrap; gap: 18px;
+      font-size: 12px; color: var(--ink-3);
+    }
+    .legend-item { display: inline-flex; align-items: center; gap: 8px; }
+    .legend-item .ic {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: inline-grid; place-items: center;
+      font-size: 11px; font-weight: 700;
+    }
+
+    .ic-yes { background: var(--ok-bg); color: var(--ok); }
+    .ic-ex  { background: var(--info-bg); color: var(--info); }
+    .ic-qm  { background: var(--warn-bg); color: var(--warn); }
+    .ic-no  { background: var(--bad-bg); color: var(--bad); }
+
+    /* ==== Section intro ==== */
+    .section-intro {
+      max-width: 1200px; margin: 0 auto;
+      padding: 56px 24px 24px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: end;
+    }
+    @media (max-width: 900px) { .section-intro { grid-template-columns: 1fr; padding: 40px 20px 16px; } }
+    .section-intro h2 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(32px, 4vw, 56px);
+      letter-spacing: -.02em; line-height: 1.05;
+    }
+    .section-intro p { color: var(--ink-3); font-size: 16px; max-width: 44ch; margin-left: auto; }
+    @media (max-width: 900px) { .section-intro p { margin-left: 0; } }
+
+    /* ==== Stack of villa cards ==== */
+    .stack {
+      max-width: 1200px; margin: 0 auto;
+      padding: 24px 24px 80px;
+      display: flex; flex-direction: column; gap: 40px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 300ms var(--ease),
+                  transform 400ms var(--ease),
+                  box-shadow 400ms var(--ease);
+    }
+    .card:hover {
+      border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
+      transform: translateY(-2px);
+      box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--ink) 25%, transparent);
+    }
+
+    /* Banner image */
+    .banner {
+      position: relative; aspect-ratio: 21 / 9; overflow: hidden;
+      background: linear-gradient(135deg, var(--aurora-1) 0%, var(--aurora-2) 40%, var(--aurora-3) 75%, var(--aurora-4) 100%);
+    }
+    .banner.v2 { background: linear-gradient(135deg, #FBCFE8 0%, #DDD6FE 50%, #A5F3FC 100%); }
+    .banner.v3 { background: linear-gradient(135deg, #A5F3FC 0%, #FDE68A 45%, #FBCFE8 100%); }
+    .banner.v4 { background: linear-gradient(135deg, #DDD6FE 0%, #A5F3FC 50%, #FDE68A 100%); }
+    .banner.v5 { background: linear-gradient(135deg, #FDE68A 0%, #FBCFE8 55%, #DDD6FE 100%); }
+    .banner.v6 { background: linear-gradient(135deg, #A5F3FC 0%, #FBCFE8 40%, #FDE68A 100%); }
+
+    .banner::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(60% 60% at 30% 30%, rgba(255,255,255,.25), transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .banner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 8s var(--ease);
+    }
+    .card:hover .banner img { transform: scale(1.03); }
+
+    .banner.no-img img { display: none; }
+    .banner-title {
+      position: absolute; left: 32px; right: 32px; bottom: 32px;
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(30px, 3.6vw, 52px); line-height: 1.02;
+      letter-spacing: -.02em; color: var(--ink-2);
+      text-shadow: 0 1px 0 rgba(255,255,255,.4);
+      z-index: 2;
+      display: none;
+    }
+    .banner.no-img .banner-title { display: block; }
+
+    .banner-rank {
+      position: absolute; top: 24px; left: 24px; z-index: 3;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500; font-size: 14px; letter-spacing: .04em;
+      color: var(--ink);
+      background: var(--paper); padding: 8px 14px;
+      border-radius: 999px; border: 1px solid var(--line);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .banner-rank .num { font-weight: 700; }
+    .banner-rank em { font-style: italic; color: var(--ink-4); }
+
+    .banner-caption {
+      position: absolute; right: 24px; top: 24px; z-index: 3;
+      padding: 6px 12px; border-radius: 999px;
+      background: color-mix(in srgb, var(--paper) 85%, transparent);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-2);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .banner-caption .dotr { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+    .banner-caption.real .dotr { background: var(--ok); }
+
+    .banner-tier {
+      position: absolute; right: 24px; bottom: 24px; z-index: 3;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--ink); color: var(--paper);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    body.dark .banner-tier { background: var(--paper); color: var(--ink); }
+
+    /* Body */
+    .card-body { padding: 40px 40px 44px; }
+    @media (max-width: 720px) { .card-body { padding: 28px 22px 32px; } .banner-title, .banner-rank, .banner-caption, .banner-tier { left: 16px; right: 16px; bottom: 16px; top: auto; } .banner-rank { top: 16px; bottom: auto; right: auto; } .banner-caption { top: 16px; right: 16px; bottom: auto; } .banner-tier { right: 16px; bottom: 16px; } .banner-title { bottom: 56px; left: 16px; right: 16px; font-size: 28px; } }
+
+    .head-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 24px; align-items: end;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 720px) { .head-row { grid-template-columns: 1fr; gap: 12px; } }
+
+    .location {
+      font-size: 12px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-4);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .location .flag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--paper-2); border: 1px solid var(--line);
+      padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; letter-spacing: .1em;
+    }
+
+    .head-row h2 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(30px, 3.4vw, 46px); line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+
+    .score-block { text-align: right; }
+    @media (max-width: 720px) { .score-block { text-align: left; } }
+    .score-block .big {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 42px; letter-spacing: -.02em; color: var(--ink);
+      line-height: 1;
+    }
+    .score-block .big span { font-size: 18px; color: var(--ink-4); }
+    .score-block .sublabel {
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-4); margin-top: 6px;
+    }
+
+    .lede {
+      font-size: 17px; line-height: 1.6; color: var(--ink-2);
+      max-width: 68ch; margin-bottom: 32px;
+    }
+    .lede::first-letter {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 46px; float: left; line-height: .9;
+      margin: 6px 12px 0 0; color: var(--accent-ink);
+    }
+    body.dark .lede::first-letter { color: #FBCFE8; }
+
+    /* Facilities */
+    .facilities {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+    @media (max-width: 640px) { .facilities { grid-template-columns: 1fr 1fr; } }
+    .fac {
+      padding: 16px 18px 16px 0; border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .fac:last-child { border-right: 0; padding-right: 0; }
+    @media (max-width: 640px) {
+      .fac:nth-child(2) { border-right: 0; }
+      .fac:nth-last-child(-n+2) { border-bottom: 0; padding-bottom: 0; }
+    }
+    .fac-head { display: flex; align-items: center; gap: 10px; }
+    .fac-ic {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .fac-label {
+      font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-4);
+    }
+    .fac-val { font-size: 14px; color: var(--ink-2); line-height: 1.35; }
+
+    /* Specs */
+    .specs {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+    @media (max-width: 640px) { .specs { grid-template-columns: 1fr 1fr; } }
+    .spec { padding: 14px 18px 14px 0; border-right: 1px solid var(--line); }
+    .spec:last-child { border-right: 0; padding-right: 0; }
+    @media (max-width: 640px) {
+      .spec:nth-child(2) { border-right: 0; }
+      .spec:nth-last-child(-n+2) { border-bottom: 0; }
+    }
+    .spec dt {
+      font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-4); margin-bottom: 6px;
+    }
+    .spec dd { font-size: 15px; font-weight: 500; color: var(--ink-2); line-height: 1.35; }
+
+    /* Note / Consider */
+    .note {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 14.5px; line-height: 1.55; color: var(--ink-3);
+      padding: 14px 18px; background: var(--paper-2);
+      border-left: 2px solid var(--ink-3); border-radius: 6px;
+      margin-bottom: 24px;
+    }
+    .note strong {
+      font-family: 'Inter', sans-serif; font-style: normal; font-weight: 600;
+      color: var(--ink-2); display: block;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 20px; border-radius: 999px;
+      font-size: 14px; font-weight: 600; letter-spacing: .005em;
+      cursor: pointer; text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 200ms var(--ease), color 200ms var(--ease),
+                  border-color 200ms var(--ease), transform 140ms var(--ease);
+      font-family: inherit;
+    }
+    .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .btn-primary:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:active { transform: scale(.98); }
+
+    .btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink-2); color: var(--ink); }
+    .btn-ghost:active { transform: scale(.98); }
+
+    .btn-copy { background: var(--paper); color: var(--ink-2); border-color: var(--line); }
+    .btn-copy:hover { border-color: var(--ink-2); color: var(--ink); }
+    .btn-copy.is-copied { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+    .btn-copy:active { transform: scale(.98); }
+
+    .btn svg {
+      width: 14px; height: 14px; fill: none; stroke: currentColor;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: transform 200ms var(--ease);
+    }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .meta-tail { margin-left: auto; font-size: 11px; letter-spacing: .08em; color: var(--ink-4); }
+
+    /* Closer */
+    .closer {
+      max-width: 1200px; margin: 0 auto 64px;
+      padding: 56px 40px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 24px; align-items: center;
+      background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
+      position: relative; overflow: hidden;
+    }
+    .closer::before {
+      content: ""; position: absolute;
+      inset: -30% -10% auto auto; width: 60%; height: 220%;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent);
+      filter: blur(40px);
+    }
+    @media (max-width: 720px) { .closer { grid-template-columns: 1fr; padding: 40px 24px; margin: 0 24px 48px; } }
+
+    .closer h4 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -.015em;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .closer p { color: var(--ink-3); font-size: 15px; max-width: 60ch; }
+
+    footer {
+      max-width: 1200px; margin: 0 auto;
+      padding: 24px 24px 64px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-4); font-size: 13px;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    footer .sig { font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      padding: 12px 20px; background: var(--ink); color: var(--paper);
+      font-size: 14px; font-weight: 500;
+      border-radius: 999px; opacity: 0;
+      transition: opacity 200ms var(--ease), transform 300ms var(--ease);
+      z-index: 70; pointer-events: none;
+      box-shadow: 0 15px 40px -15px rgba(0,0,0,.3);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ==== Extra opties: 3-col grid ==== */
+    .extras-wrap {
+      max-width: 1200px; margin: 16px auto 0;
+      padding: 0 24px 80px;
+    }
+    .extras-head {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 16px; align-items: end;
+      padding: 40px 0 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 720px) { .extras-head { grid-template-columns: 1fr; padding: 32px 0 20px; } }
+    .extras-head h3 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(28px, 3.2vw, 40px); letter-spacing: -.02em; line-height: 1.05;
+      color: var(--ink);
+    }
+    .extras-head p {
+      color: var(--ink-3); font-size: 15px; max-width: 56ch;
+      margin-top: 8px;
+    }
+    .extras-head .eyebrow-line {
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-4); font-weight: 600;
+    }
+    .extras-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 960px) { .extras-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 620px) { .extras-grid { grid-template-columns: 1fr; } }
+
+    .mini-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color 300ms var(--ease),
+                  transform 400ms var(--ease),
+                  box-shadow 400ms var(--ease);
+    }
+    .mini-card:hover {
+      border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--ink) 25%, transparent);
+    }
+    .mini-banner {
+      position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+      background: linear-gradient(135deg, var(--aurora-1) 0%, var(--aurora-2) 40%, var(--aurora-3) 75%, var(--aurora-4) 100%);
+    }
+    .mini-banner.v2 { background: linear-gradient(135deg, #FBCFE8 0%, #DDD6FE 50%, #A5F3FC 100%); }
+    .mini-banner.v3 { background: linear-gradient(135deg, #A5F3FC 0%, #FDE68A 45%, #FBCFE8 100%); }
+    .mini-banner.v4 { background: linear-gradient(135deg, #DDD6FE 0%, #A5F3FC 50%, #FDE68A 100%); }
+    .mini-banner.v5 { background: linear-gradient(135deg, #FDE68A 0%, #FBCFE8 55%, #DDD6FE 100%); }
+    .mini-banner.v6 { background: linear-gradient(135deg, #A5F3FC 0%, #FBCFE8 40%, #FDE68A 100%); }
+    .mini-banner::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(60% 60% at 30% 30%, rgba(255,255,255,.22), transparent 70%);
+      mix-blend-mode: screen; pointer-events: none;
+    }
+    .mini-banner img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 8s var(--ease);
+    }
+    .mini-card:hover .mini-banner img { transform: scale(1.04); }
+    .mini-banner.no-img img { display: none; }
+    .mini-banner .m-title {
+      position: absolute; left: 18px; right: 18px; bottom: 16px;
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 24px; line-height: 1.08; letter-spacing: -.015em;
+      color: var(--ink-2);
+      text-shadow: 0 1px 0 rgba(255,255,255,.4);
+      z-index: 2; display: none;
+    }
+    .mini-banner.no-img .m-title { display: block; }
+    .mini-banner .m-tier {
+      position: absolute; top: 14px; right: 14px; z-index: 3;
+      padding: 5px 10px; border-radius: 999px;
+      background: var(--paper); border: 1px solid var(--line);
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink);
+    }
+    body.dark .mini-banner .m-tier { background: var(--paper); color: var(--ink); }
+    .mini-banner .m-flag {
+      position: absolute; top: 14px; left: 14px; z-index: 3;
+      padding: 5px 10px; border-radius: 999px;
+      background: color-mix(in srgb, var(--paper) 85%, transparent);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      font-size: 11px; font-weight: 600;
+      color: var(--ink-2);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .mini-body {
+      padding: 20px 22px 22px;
+      display: flex; flex-direction: column; gap: 14px;
+      flex: 1;
+    }
+    .mini-body h4 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 22px; line-height: 1.15; letter-spacing: -.01em;
+      color: var(--ink);
+    }
+    .mini-loc {
+      font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--ink-4); font-weight: 600;
+    }
+    .mini-lede {
+      color: var(--ink-3); font-size: 14px; line-height: 1.55;
+    }
+    .mini-facs {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .mini-fac {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 999px;
+      background: var(--paper-2);
+      font-size: 12px; color: var(--ink-2); font-weight: 500;
+    }
+    .mini-fac .ic {
+      width: 14px; height: 14px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 800;
+    }
+    .mini-fac .ic-yes { background: var(--ok-bg); color: var(--ok); }
+    .mini-fac .ic-qm { background: var(--warn-bg); color: var(--warn); }
+    .mini-specs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      padding: 12px 0 0;
+      border-top: 1px dashed var(--line);
+    }
+    .mini-specs dt {
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-4); font-weight: 700; margin-bottom: 2px;
+    }
+    .mini-specs dd {
+      font-size: 13px; color: var(--ink-2); font-weight: 500;
+    }
+    .mini-actions {
+      display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap;
+    }
+    .mini-actions .btn {
+      padding: 8px 14px; font-size: 13px;
+      border-radius: 999px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none;
+      transition: background 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+    }
+    .mini-actions .btn svg {
+      width: 12px; height: 12px; stroke: currentColor;
+      stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .mini-actions .btn-primary {
+      background: var(--ink); color: var(--paper);
+      border: 1px solid var(--ink);
+    }
+    .mini-actions .btn-primary:hover { background: var(--ink-2); }
+    .mini-actions .btn-ghost {
+      background: transparent; color: var(--ink-2);
+      border: 1px solid var(--line);
+    }
+    .mini-actions .btn-ghost:hover { border-color: var(--ink-3); }
+
+    /* ==== Hoofdstack als 3-kolom mini-card grid
+       (overide op oude .card/.banner/.facilities: zelfde stijl als extras) ==== */
+    .stack {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px !important;
+      padding: 24px 24px 48px !important;
+    }
+    @media (max-width: 960px) { .stack { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 620px) { .stack { grid-template-columns: 1fr !important; } }
+
+    .stack .card {
+      display: flex; flex-direction: column;
+      height: 100%;
+    }
+
+    /* Banner: alleen tier badge, geen rank/caption */
+    .stack .banner { aspect-ratio: 4 / 3; }
+    .stack .banner-rank,
+    .stack .banner-caption { display: none; }
+    .stack .banner-title {
+      font-size: 22px; left: 16px; right: 16px; bottom: 14px;
+      line-height: 1.1;
+    }
+    .stack .banner-tier {
+      top: 12px; right: 12px; bottom: auto; left: auto;
+      padding: 5px 10px; font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* Body */
+    .stack .card-body {
+      padding: 18px 20px 20px;
+      flex: 1; display: flex; flex-direction: column; gap: 12px;
+    }
+
+    /* Head row: location boven, naam, score rechts */
+    .stack .head-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 12px; align-items: start;
+      padding: 0; border: 0;
+    }
+    .stack .head-row > div:first-child { min-width: 0; }
+    .stack .location {
+      font-size: 11px; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--ink-4); font-weight: 600;
+      margin-bottom: 4px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .stack .location .flag { color: var(--ink-2); }
+    .stack .head-row h2 {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 22px; line-height: 1.15; letter-spacing: -.01em;
+      margin: 0;
+    }
+    .stack .score-block { text-align: right; flex-shrink: 0; }
+    .stack .score-block .big {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 22px; line-height: 1; letter-spacing: -.01em;
+    }
+    .stack .score-block .big span { font-size: 11px; color: var(--ink-4); }
+    .stack .score-block .sublabel {
+      font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-4); margin-top: 2px; font-weight: 600;
+    }
+
+    /* Lede — iets meer tekst dan bij de extras (6 regels ipv 3) */
+    .stack .lede {
+      font-size: 14px; line-height: 1.55; color: var(--ink-3);
+      display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .stack .lede::first-letter {
+      font-size: 1em; line-height: inherit; float: none;
+      margin: 0; padding: 0; color: inherit; font-family: inherit;
+    }
+
+    /* Facilities als horizontale chips (niet meer een 4-col tabel) */
+    .stack .facilities {
+      display: flex; flex-wrap: wrap;
+      grid-template-columns: unset;
+      gap: 6px;
+      padding: 0; border: 0;
+    }
+    .stack .fac {
+      display: inline-flex; align-items: center;
+      padding: 4px 10px; border-radius: 999px;
+      background: var(--paper-2);
+      border: 0;
+      gap: 6px;
+    }
+    .stack .fac-head { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+    .stack .fac-ic { width: 14px; height: 14px; font-size: 9px; font-weight: 800; }
+    .stack .fac-label {
+      font-size: 12px; font-weight: 500; color: var(--ink-2);
+      letter-spacing: 0; text-transform: none;
+    }
+    .stack .fac-val { display: none; }
+
+    /* Specs: 2 kolommen, locatie verbergen (staat al in .location) */
+    .stack .specs {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      padding: 10px 0 0;
+      border-top: 1px dashed var(--line);
+    }
+    .stack .specs .spec:nth-child(3) { display: none; }
+    .stack .specs dt {
+      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-4); font-weight: 700; margin-bottom: 2px;
+    }
+    .stack .specs dd { font-size: 13px; color: var(--ink-2); font-weight: 500; }
+
+    /* Actions */
+    .stack .actions {
+      padding: 0; gap: 8px; flex-wrap: wrap;
+      margin-top: auto;
+      border-top: 0;
+      display: flex; align-items: center;
+    }
+    .stack .actions .btn {
+      padding: 8px 14px; font-size: 13px;
+      border-radius: 999px;
+    }
+    .stack .actions .btn svg { width: 12px; height: 12px; }
+    .stack .meta-tail { display: none; }
+
+    @media (max-width: 620px) {
+      .stack .banner { aspect-ratio: 16 / 10; }
+      .stack .banner-title { font-size: 26px; }
+    }
+
+    /* Waarschuwings-strook bovenin een kaart */
+    .stack .notice {
+      background: var(--warn-bg);
+      color: var(--warn);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px; line-height: 1.4;
+      border: 1px solid color-mix(in srgb, var(--warn) 25%, transparent);
+    }
+    .stack .notice strong { font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="wordmark"><span class="wordmark-mark"></span>Holiday Scout</div>
+    <nav class="nav" aria-label="Hoofdnavigatie">
+      <a href="#stack" aria-current="page">Top kandidaten</a>
+      <a href="#extras">Uitgebreid budget</a>
+    </nav>
+    <button class="mode-btn" id="modeBtn" aria-label="Wissel lichte en donkere modus">
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Jávea diep · 20-27 augustus 2026 · 3 volw + 3 kinderen</span>
+    <h1 id="heroTitle">Twaalf villa's in Jávea, gerangschikt op <em>echte</em> augustus-prijs en zandstrand-werkelijkheid.</h1>
+    <dl class="hero-meta">
+      <div><dt>Wanneer</dt><dd>20-27 augustus 2026</dd></div>
+      <div><dt>Gezelschap</dt><dd>3 volw + 3 kinderen (4, 6, 7)</dd></div>
+      <div><dt>Eis</dt><dd>Privé pool · BBQ · airco · zand &lt; 10 min</dd></div>
+      <div><dt>Bron</dt><dd>Aguilarent + Excellence + eerdere ronde</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="legend" aria-label="Faciliteiten-legenda">
+  <span class="legend-item"><span class="ic ic-yes">✓</span>Bevestigd</span>
+  <span class="legend-item"><span class="ic ic-qm">?</span>Onbekend, navragen</span>
+  <span class="legend-item"><span class="ic ic-no">✕</span>Niet aanwezig</span>
+</section>
+
+<section class="section-intro">
+  <h2>Eerlijke prijs-realiteit eerst.</h2>
+  <p>De €1.631–€2.258 schattingen uit de eerste onderzoeksronde bleken shoulder-tarieven. Excellence's gepubliceerde week-prijzen voor augustus 2026 lopen van €3.950 tot €8.950 per villa. Aguilarent's directe-eigenaar-villa's in Cala Andrago zitten op €1.435 tot €1.708 voor zeven nachten in hoogseizoen, een derde van de Excellence-luxe-prijzen. Volgorde hieronder is op prijs/groep, met de twee Calma Marina-leads bovenaan voor wie binnen het oorspronkelijke €2K-doel wil blijven. Bekijk ook de zone-uitleg in <a href="javea-zones.md" style="color:var(--accent)">javea-zones.md</a> om te kiezen waar in Jávea je wilt landen.</p>
+</section>
+
+<section id="stack" class="stack" aria-label="Top kandidaten">
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Calma Marina 6 pax" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Calma Marina 6 pax</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Cala Andrago · Cap Negre</span></div>
+          <h2>Calma Marina 6 pax</h2>
+        </div>
+        <div class="score-block"><div class="big">9.0<span> / 10</span></div><div class="sublabel">Beste prijs/groep</div></div>
+      </div>
+      <p class="lede">Privévilla met eigen pool van Aguilarent in de noordelijke Calma-zone, vijfhonderd meter van Cala Andrago. Voor onze zes is dit qua capaciteit-versus-prijs precies de juiste maat: drie slaapkamers, tweehonderdvijf euro per nacht oftewel veertienhonderd euro voor zeven nachten in hoogseizoen, ruim onder doel. Voor zandstrand rijd je vijf minuten naar Arenal.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-qm">?</span><span class="fac-label">Strand kiezels</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>~€1.435/wk</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>6 personen · 3 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Cala Andrago · Cap Negre</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:reservations@aguilarent.com?subject=Reserva%20Calma%20Marina%206%20pax%20%C2%B7%2020-27%20agosto%202026&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://www.aguilarent.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+34966470830">Bel +34 966 470 830 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Calma Marina 8 pax" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Calma Marina 8 pax</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Cala Andrago · Cap Negre</span></div>
+          <h2>Calma Marina 8 pax</h2>
+        </div>
+        <div class="score-block"><div class="big">8.9<span> / 10</span></div><div class="sublabel">Ruimer + zelfde zone</div></div>
+      </div>
+      <p class="lede">Iets grotere variant van Calma Marina, vier slaapkamers en plek voor acht personen. Tweehonderdvierenveertig euro per nacht in hoogseizoen, dus zeventienhonderd euro voor zeven nachten. Zelfde locatie aan Cala Andrago, dus authentieke noord-Jávea zonder Arenal-toeristendrukte.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-qm">?</span><span class="fac-label">Strand kiezels</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>~€1.708/wk</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>8 personen · 4 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Cala Andrago · Cap Negre</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:reservations@aguilarent.com?subject=Reserva%20Calma%20Marina%208%20pax%20%C2%B7%2020-27%20agosto%202026&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://www.aguilarent.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+34966470830">Bel +34 966 470 830 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://b3470997.smushcdn.com/3470997/wp-content/uploads/2026/04/casa-saladar-javea-luxury-villa-rental-javea-spain-sea-view-01.jpg?lossy=2&strip=1&webp=1" alt="Casa Saladar" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Casa Saladar</h3>
+      <span class="banner-tier">Tier A+</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Levante · Costa Blanca</span></div>
+          <h2>Casa Saladar — Levante 5BR</h2>
+        </div>
+        <div class="score-block"><div class="big">8.8<span> / 10</span></div><div class="sublabel">Eerder gevonden</div></div>
+      </div>
+      <p class="lede">Vijf bedkamers over twee niveaus, zeezicht uit drie kamers, en het rustige Levante-gedeelte van Jávea. De eerste schatting van zeventienhonderd euro per week komt uit shoulder-tarieven; reken voor de echte augustusweek op drie- tot vierduizend euro. Boven budget maar ruim qua capaciteit.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-qm">?</span><span class="fac-label">Strand 5-15min</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>€3.000–€4.500/wk (verifiëren)</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>10 personen · 5 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Levante · Costa Blanca</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Casa%20Saladar%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://b3470997.smushcdn.com/3470997/wp-content/uploads/2024/12/Rent-Holiday-Villas-Vacation-Home-Rentals-w.jpg" alt="Villa Pinatar" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Villa Pinatar</h3>
+      <span class="banner-tier">Tier A+</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Granadella · Cap de la Nau</span></div>
+          <h2>Villa Pinatar — Granadella</h2>
+        </div>
+        <div class="score-block"><div class="big">8.5<span> / 10</span></div><div class="sublabel">Eerder gevonden</div></div>
+      </div>
+      <p class="lede">Vijf bedkamers en een verwarmde privé-pool aan Granadella Park. Belangrijke correctie ten opzichte van eerste ronde: het strand bij Granadella is geen zand maar kiezels en in augustus extreem druk met parkeer-uitdagingen. Voor zandstrand rijd je vijf minuten naar Arenal. Reële augustusprijs vermoedelijk vijfentwintighonderd tot vijfendertighonderd euro.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-no">✕</span><span class="fac-label">Geen zandstrand</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>€2.500–€3.500/wk (verifiëren)</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>10 personen · 5 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Granadella · Cap de la Nau</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Villa%20Pinatar%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Casa Tossal" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Casa Tossal</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Pueblo · Centro Histórico</span></div>
+          <h2>Casa Tossal — Pueblo zone</h2>
+        </div>
+        <div class="score-block"><div class="big">8.7<span> / 10</span></div><div class="sublabel">Cultuur + restaurants</div></div>
+      </div>
+      <p class="lede">Gerenoveerde villa in de oude kern van Jávea. Voor wie eten en cultuur boven strand zet is dit de juiste keuze: tapas-bars en restaurants op loopafstand, en in vijf minuten ben je met de auto bij Arenal. Eerder geschat op €2.258 per week, voor augustus vermoedelijk hoger.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Loop-restaurants</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>€2.500–€3.300/wk (verifiëren)</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>8-10 personen</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Pueblo · Centro Histórico</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Casa%20Tossal%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Villa Terrace sur Mer" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Villa Terrace sur Mer</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Coastal Jávea</span></div>
+          <h2>Villa Terrace sur Mer</h2>
+        </div>
+        <div class="score-block"><div class="big">8.6<span> / 10</span></div><div class="sublabel">Geverifieerde augustus-prijs</div></div>
+      </div>
+      <p class="lede">Vijf slaapkamers voor het tarief dat anderen vragen voor vier. Excellence's listing toont de augustus-week 2026 voor £3.399, oftewel ongeveer €3.950 voor zeven nachten. Niet de goedkoopste maar wel een van de weinige villa's met een gepubliceerde piek-augustus-week.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Coastal</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>~€3.950/wk</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>10 personen · 5 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Coastal Jávea</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Villa%20Terrace%20sur%20Mer%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com/properties/stunning-villa-terrace-sur-mer-your-perfect-coastal-getaway-2/" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Villa Juno" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Villa Juno</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Jávea hoogland</span></div>
+          <h2>Villa Juno — Excellence</h2>
+        </div>
+        <div class="score-block"><div class="big">8.4<span> / 10</span></div><div class="sublabel">Geverifieerde augustus-prijs</div></div>
+      </div>
+      <p class="lede">Vier slaapkamers, privé pool, zeezicht. Excellence's listing toont £3.398 voor de augustus-week — €3.950. Iets compacter dan Terrace sur Mer maar vergelijkbare prijs. Voor wie geen vijfde slaapkamer nodig heeft een logischere keuze.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Zeezicht</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>~€3.950/wk</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>8 personen · 4 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Jávea hoogland</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Villa%20Juno%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com/properties/luxury-villa-juno-stunning-holiday-retreat-with-private-pool-and-scenic-views-2/" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="card">
+    <div class="banner no-img">
+      <img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Exorbo" referrerpolicy="no-referrer" onload="this.closest('.banner').classList.remove('no-img')" onerror="this.closest('.banner').classList.add('no-img'); this.remove();"><h3 class="banner-title">Exorbo</h3>
+      <span class="banner-tier">Tier A</span>
+    </div>
+    <div class="card-body">
+      <div class="head-row">
+        <div>
+          <div class="location"><span class="flag">🇪🇸 Spanje</span><span>Jávea</span></div>
+          <h2>Exorbo — Excellence</h2>
+        </div>
+        <div class="score-block"><div class="big">8.3<span> / 10</span></div><div class="sublabel">Geverifieerde augustus-prijs</div></div>
+      </div>
+      <p class="lede">Vier slaapkamers, privé pool, vermoedelijk hooggelegen. Excellence's prijs voor augustus-week £3.420 oftewel €3.975. Vergelijkbaar profiel met Juno; vraag de offerte op om te kiezen op locatie en uitrusting.</p>
+      <dl class="facilities">
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Privé pool</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">BBQ</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-yes">✓</span><span class="fac-label">Airco</span></div><span class="fac-val"></span></div>
+        <div class="fac"><div class="fac-head"><span class="fac-ic ic-qm">?</span><span class="fac-label">Strand kiezels</span></div><span class="fac-val"></span></div>
+      </dl>
+      <dl class="specs">
+        <div class="spec"><dt>Prijs</dt><dd>~€3.975/wk</dd></div>
+        <div class="spec"><dt>Slaapt</dt><dd>8 personen · 4 slpkmrs</dd></div>
+        <div class="spec"><dt>Locatie</dt><dd>Jávea</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Exorbo%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com/properties/exorbo-luxury-villa-rental-for-unforgettable-holiday-stays-2/" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">Bel +44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<section id="extras" class="extras-wrap" aria-label="Uitgebreid budget">
+  <div class="extras-head">
+    <div>
+      <span class="eyebrow-line">Uitgebreid budget · 4 reserves</span>
+      <h3>Voor als je het budget oprekt of de top 8 niet matcht.</h3>
+      <p>Twee gecorrigeerde villa's uit de eerste ronde (Casa Picaio en Casa Olimpo waren ten onrechte in Italië gepind) plus twee Excellence-luxe opties met geverifieerde augustus-prijs.</p>
+    </div>
+  </div>
+  <div class="extras-grid">
+
+    <article class="mini-card" data-villa="Casa Picaio">
+      <div class="mini-banner v2"><img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Casa Picaio" referrerpolicy="no-referrer" onerror="this.closest('.mini-banner').classList.add('no-img'); this.remove();">
+        <span class="m-flag">🇪🇸 Spanje</span>
+        <span class="m-tier">Tier A</span>
+        <h4 class="m-title">Casa Picaio</h4>
+      </div>
+      <div class="mini-body">
+        <div>
+          <div class="mini-loc">Jávea · Costa Blanca</div>
+          <h4>Casa Picaio (gecorrigeerd Jávea)</h4>
+        </div>
+        <p class="mini-lede">Moderne villa met dakpool en zeezicht. Eerder per ongeluk in Tropea-zone gerubriceerd; bevestigd Jávea. Eerste prijsschatting €1.631; reëel augustus 2026 vermoedelijk €2.000–€3.000.</p>
+        <div class="mini-facs">
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>Pool</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>BBQ</span>
+          <span class="mini-fac"><span class="ic ic-qm">?</span>Zone</span>
+        </div>
+        <dl class="mini-specs">
+          <div><dt>Prijs</dt><dd>€2.000–€3.000/wk</dd></div>
+          <div><dt>Slaapt</dt><dd>8 · 4 BR</dd></div>
+        </dl>
+        <div class="mini-actions">
+          <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Casa%20Picaio%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">+44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mini-card" data-villa="Casa Olimpo">
+      <div class="mini-banner v3"><img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Casa Olimpo" referrerpolicy="no-referrer" onerror="this.closest('.mini-banner').classList.add('no-img'); this.remove();">
+        <span class="m-flag">🇪🇸 Spanje</span>
+        <span class="m-tier">Tier A</span>
+        <h4 class="m-title">Casa Olimpo</h4>
+      </div>
+      <div class="mini-body">
+        <div>
+          <div class="mini-loc">Jávea · Costa Blanca</div>
+          <h4>Casa Olimpo (gecorrigeerd Jávea)</h4>
+        </div>
+        <p class="mini-lede">Hedendaagse villa met privé verwarmde pool. Eerder Ostuni-gelabeld, bevestigd Jávea. Reëel augustus 2026 vermoedelijk €2.300–€3.200.</p>
+        <div class="mini-facs">
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>Pool</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>BBQ</span>
+          <span class="mini-fac"><span class="ic ic-qm">?</span>Zone</span>
+        </div>
+        <dl class="mini-specs">
+          <div><dt>Prijs</dt><dd>€2.300–€3.200/wk</dd></div>
+          <div><dt>Slaapt</dt><dd>8 · 4 BR</dd></div>
+        </dl>
+        <div class="mini-actions">
+          <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Casa%20Olimpo%20%C2%B7%2020-27%20August%202026%20%C2%B7%206%20guests&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">+44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mini-card" data-villa="Villa Morers Plus">
+      <div class="mini-banner v4"><img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Villa Morers Plus" referrerpolicy="no-referrer" onerror="this.closest('.mini-banner').classList.add('no-img'); this.remove();">
+        <span class="m-flag">🇪🇸 Spanje</span>
+        <span class="m-tier">Tier A</span>
+        <h4 class="m-title">Villa Morers Plus</h4>
+      </div>
+      <div class="mini-body">
+        <div>
+          <div class="mini-loc">Jávea · 5BR</div>
+          <h4>Villa Morers Plus</h4>
+        </div>
+        <p class="mini-lede">Vijf slaapkamers, privé pool. Geverifieerde augustus-prijs £3.689, oftewel €4.290. Iets duurder dan Terrace sur Mer maar vermoedelijk uitgebreider.</p>
+        <div class="mini-facs">
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>Pool</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>BBQ</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>5 BR</span>
+        </div>
+        <dl class="mini-specs">
+          <div><dt>Prijs</dt><dd>~€4.290/wk</dd></div>
+          <div><dt>Slaapt</dt><dd>10 · 5 BR</dd></div>
+        </dl>
+        <div class="mini-actions">
+          <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Villa%20Morers%20Plus%20%C2%B7%2020-27%20August%202026&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com/properties/villa-morers-plus-luxurious-holiday-retreat-with-stunning-views-and-modern-amenities-2/" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">+44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mini-card" data-villa="Villa Halcon al Mar">
+      <div class="mini-banner v5"><img src="https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/9/9b/J%C3%A1vea_desde_el_Montg%C3%B3.jpg&w=1200&q=80&output=jpg" alt="Villa Halcon al Mar" referrerpolicy="no-referrer" onerror="this.closest('.mini-banner').classList.add('no-img'); this.remove();">
+        <span class="m-flag">🇪🇸 Spanje</span>
+        <span class="m-tier">Tier A</span>
+        <h4 class="m-title">Villa Halcon al Mar</h4>
+      </div>
+      <div class="mini-body">
+        <div>
+          <div class="mini-loc">Seaside Jávea</div>
+          <h4>Villa Halcon al Mar</h4>
+        </div>
+        <p class="mini-lede">Stunning seaside retreat volgens listing. Vier slaapkamers, geverifieerde augustus-week £3.961 = €4.605. Vermoedelijk dichter bij water dan inland-villas.</p>
+        <div class="mini-facs">
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>Pool</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>BBQ</span>
+          <span class="mini-fac"><span class="ic ic-yes">✓</span>Seaside</span>
+        </div>
+        <dl class="mini-specs">
+          <div><dt>Prijs</dt><dd>~€4.605/wk</dd></div>
+          <div><dt>Slaapt</dt><dd>8 · 4 BR</dd></div>
+        </dl>
+        <div class="mini-actions">
+          <a class="btn btn-primary" href="mailto:hi@excellenceluxuryvillas.com?subject=Villa%20Halcon%20al%20Mar%20%C2%B7%2020-27%20August%202026&body=Hola%2C%0A%0Aquerr%C3%ADamos%20reservar%20una%20villa%20para%207%20noches%20del%2020%20al%2027%20de%20agosto%20de%202026%2C%20para%203%20adultos%20%28dos%20parejas%29%20y%203%20ni%C3%B1os%20%284%2C%206%20y%207%20a%C3%B1os%29.%0A%0ANecesitamos%3A%20piscina%20privada%2C%20BBQ%2C%20aire%20acondicionado%2C%20al%20menos%203%20dormitorios%20separados%2C%20y%20preferiblemente%20playa%20de%20arena%20a%20poca%20distancia%20o%20coche%20corto.%0A%0A%C2%BFPueden%20indicarnos%20disponibilidad%2C%20precio%20total%20para%20esa%20semana%2C%20y%20qu%C3%A9%20villa%20recomiendan%20para%20nuestro%20grupo%3F%0A%0AMuchas%20gracias%2C%0ABen%20Zoref%0A%28env%C3%ADo%20desde%20los%20Pa%C3%ADses%20Bajos%29">Mail direct <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+        <a class="btn btn-ghost" href="https://excellenceluxuryvillas.com/properties/villa-halcon-al-mar-stunning-seaside-retreat-for-your-perfect-getaway-2/" target="_blank" rel="noopener">Bekijk site <svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-11 11M5 7v12h12"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+442073629055">+44 207 362 9055 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="closer">
+  <div>
+    <h4>Mail drie tegelijk en vergelijk.</h4>
+    <p>Aguilarent voor Calma Marina (€1.435), Excellence voor Casa Saladar (verifieer augustus-quote), en Excellence voor Villa Juno of Terrace sur Mer (€3.950 bevestigd). Drie offertes geven je houvast op de echte prijs voor 20-27 augustus.</p>
+  </div>
+  <a class="btn btn-primary" href="#stack">Terug naar top</a>
+</section>
+
+<footer>
+  <span>Holiday Scout · Jávea diep · 20-27 augustus 2026</span>
+  <span class="sig">Volgorde op prijs per groep · zandstrand-werkelijkheid</span>
+  <span>Bijgewerkt 26 april 2026</span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">E-mail gekopieerd naar klembord</div>
+
+<script>
+  const modeBtn = document.getElementById('modeBtn');
+  const root = document.body;
+  const setMode = (isDark, persist = true) => {
+    root.classList.toggle('dark', isDark);
+    modeBtn.setAttribute('aria-pressed', isDark);
+    if (persist) localStorage.setItem('hs-mode', isDark ? 'dark' : 'light');
+  };
+  const stored = localStorage.getItem('hs-mode');
+  if (stored) setMode(stored === 'dark', false);
+  else setMode(false, false);
+  modeBtn.addEventListener('click', () => setMode(!root.classList.contains('dark')));
+
+  // Foto's staan nu inline in de HTML (geen JS-injectie meer — robuuster,
+  // onafhankelijk van timing of browser-cache).
+</script>
+
+
+</body>
+</html>
